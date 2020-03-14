@@ -19,7 +19,8 @@ HEADERS += \
     firstrun.h \
     gesturefilterarea.h \
     launcherlocalemanager.h \
-    notificationsnoozer.h
+    notificationsnoozer.h \
+    process.h
 
 RESOURCES += \
     resources-qml.qrc

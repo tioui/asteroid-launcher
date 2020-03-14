@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2015 Florent Revest <revestflo@gmail.com>
+ * Copyright (C) 2020 Louis Marchand <prog@tioui.com>
+ *               2015 Florent Revest <revestflo@gmail.com>
  *               2014 Aleksi Suomalainen <suomalainen.aleksi@gmail.com>
  * All rights reserved.
  *
@@ -35,6 +36,7 @@ import org.nemomobile.systemsettings 1.0
 import Nemo.Ngf 1.0
 import org.asteroid.controls 1.0
 import org.asteroid.utils 1.0
+import Process 1.0
 
 Item {
     id: rootitem
@@ -57,24 +59,18 @@ Item {
         value: false
     }
 
-    DBusInterface {
-        id: mce_dbus
-
-        service: "com.nokia.mce"
-        path: "/com/nokia/mce/request"
-        iface: "com.nokia.mce.request"
-
-        bus: DBus.SystemBus
+    Process {
+        id: process
     }
 
     QuickSettingsToggle {
-        id: lockedToggle
+        id: sleepToggle
         anchors.top: rootitem.top
         anchors.horizontalCenter: rootitem.horizontalCenter
-        icon: "ios-unlock"
-        togglable: false
-        toggled: false
-        onUnchecked: mce_dbus.call("req_display_state_off", undefined)
+        icon: "ios-sleep-circle-outline"
+        onChecked: process.start("/usr/sbin/mcetool -z never");
+        onUnchecked: process.start("/usr/sbin/mcetool -z proximity");
+        Component.onCompleted: sleepToggle.toggled = 0 === process.start("/usr/sbin/mcetool | grep 'Double-tap wakeup policy' | grep -q never");
     }
 
     DisplaySettings {

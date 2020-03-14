@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2015 Florent Revest <revestflo@gmail.com>
+ * Copyright (C) 2020 Louis Marchand <prog@tioui.com>
+ *               2015 Florent Revest <revestflo@gmail.com>
  *               2014 Aleksi Suomalainen <suomalainen.aleksi@gmail.com>
  *               2012 Timur Kristóf <venemo@fedoraproject.org>
  * All rights reserved.
@@ -45,6 +46,7 @@
 #include "launcherlocalemanager.h"
 #include "gesturefilterarea.h"
 #include "notificationsnoozer.h"
+#include "process.h"
 
 int main(int argc, char **argv)
 {
@@ -85,6 +87,7 @@ int main(int argc, char **argv)
     qmlRegisterType<AppLauncherBackground>("org.asteroid.launcher", 1, 0, "AppLauncherBackground");
     qmlRegisterType<GestureFilterArea>("org.asteroid.launcher", 1, 0, "GestureFilterArea");
     qmlRegisterType<NotificationSnoozer>("org.asteroid.launcher", 1, 0, "NotificationSnoozer");
+    qmlRegisterType<Process>("Process", 1, 0, "Process");
     app.setQmlPath("qrc:/qml/MainScreen.qml");
 
     // Give these to the environment inside the lipstick homescreen

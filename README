@@ -1,3 +1,11 @@
-Asteroid-launcher is a wayland compositor which uses Lipstick from NemoMobile which itself uses QML, QtWayland, QPA etc... It is designed to provide a smartwatch UX for the AsteroidOS project.
+This is a modification of the original asteroid-launcher used to replace the
+lock button in the quick settings for a sleep toggle button. The sleep toggle
+button is used to desactivate the "tilt-to-wake" functionnality of the watch.
 
-Asteroid-launcher is released under the BSD license and is based on Glacier-Home (released under the BSD license) which is itself based on lipstick-colorful-home(released under MIT provided in COPYING.MIT).
+Asteroid-launcher is a wayland compositor which uses Lipstick from NemoMobile which
+itself uses QML, QtWayland, QPA etc... It is designed to provide a smartwatch UX
+for the AsteroidOS project.
+
+Asteroid-launcher is released under the BSD license and is based on Glacier-Home 
+(released under the BSD license) which is itself based on 
+lipstick-colorful-home(released under MIT provided in COPYING.MIT).
