@@ -19,8 +19,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
-#include <QProcess>
-#include <QVariant>
+#include <QObject>
 #include <stdlib.h>
 
 class Process : public QObject {
