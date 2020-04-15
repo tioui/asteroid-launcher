@@ -63,14 +63,24 @@ Item {
         id: process
     }
 
+    DBusInterface {
+        id: mce_dbus
+
+        service: "com.nokia.mce"
+        path: "/com/nokia/mce/request"
+        iface: "com.nokia.mce.request"
+
+        bus: DBus.SystemBus
+    }
+
     QuickSettingsToggle {
-        id: sleepToggle
+        id: lockedToggle
         anchors.top: rootitem.top
         anchors.horizontalCenter: rootitem.horizontalCenter
-        icon: "ios-sleep-circle-outline"
-        onChecked: process.start("/usr/sbin/mcetool -z never");
-        onUnchecked: process.start("/usr/sbin/mcetool -z proximity");
-        Component.onCompleted: sleepToggle.toggled = 0 === process.start("/usr/sbin/mcetool | grep 'Double-tap wakeup policy' | grep -q never");
+        icon: "ios-unlock"
+        togglable: false
+        toggled: false
+        onUnchecked: mce_dbus.call("req_display_state_off", undefined)
     }
 
     DisplaySettings {
@@ -111,29 +121,17 @@ Item {
         event: "press"
     }
 
-    ProfileControl {
-         id: profileControl
-    }
-
-    Timer {
-        id: delayTimer
-        interval: 125
-        repeat: false
-        onTriggered: feedback.play()
-    }
 
     QuickSettingsToggle {
-        id: hapticsToggle
+        id: sleepToggle
         anchors.right: rootitem.right
         anchors.verticalCenter: rootitem.verticalCenter
-        icon: "ios-watch-vibrating"
-        onChecked: {
-            profileControl.profile = "general";
-            delayTimer.start();
-        }
-        onUnchecked: profileControl.profile = "silent";
-        Component.onCompleted: toggled = profileControl.profile == "general"
+        icon: "ios-sleep-circle-outline"
+        onChecked: process.start("/usr/sbin/mcetool -z never");
+        onUnchecked: process.start("/usr/sbin/mcetool -z proximity");
+        Component.onCompleted: sleepToggle.toggled = 0 === process.start("/usr/sbin/mcetool | grep 'Double-tap wakeup policy' | grep -q never");
     }
+
 
     Item {
         id: battery
